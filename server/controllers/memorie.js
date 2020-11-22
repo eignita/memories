@@ -3,7 +3,6 @@ import memorie from "../models/memorie.js";
 export const getMemories = async (req, res) => {
   try {
     const memories = await memorie.find();
-    console.log(res.json);
     res.status(200).json(memories);
   } catch (error) {
     res.status(404).json({ message: error.message });

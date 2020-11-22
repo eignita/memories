@@ -33,3 +33,6 @@ HTTPstatus codes: https://www.restapitutorial.com/httpstatuscodes.html
 Issue - Cannot install @material-ui/core with npm 7 and React 17
 Sol: npm install --save --legacy-peer-deps @material-ui/icons
      npm install --save --legacy-peer-deps @material-ui/core
+
+
+Provider: react-redux = keep track of global store to provide global state using store inside anywhere in app.

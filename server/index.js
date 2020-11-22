@@ -6,11 +6,11 @@ import mongoose from "mongoose";
 import memorieRoutes from './routes/memorieRoutes.js';
 
 const app = express();
-// http://localhost:5000/posts/
-app.use('/memories', memorieRoutes); 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
+// http://localhost:5000/memories/
+app.use('/memories', memorieRoutes); 
 
 const CONNECTION_URL = "mongodb+srv://mongodb:mongodb123@dev.vusud.mongodb.net/learn?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 5000;
