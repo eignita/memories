@@ -6,7 +6,7 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
 import useStyles from './styles';
 
-function Memory({memory}) {
+function Memory({memory, setCurrentId}) {
     const classes = useStyles();
     return (
         <Card className={classes.card}>
@@ -16,27 +16,25 @@ function Memory({memory}) {
                 <Typography variant="body2">{ moment(memory.createdAt).fromNow()}</Typography>
             </div>
             <div className={classes.overlay2}>
-                <Button style={{color: 'white'}} size="small" onClick={() => {}}>
+                <Button style={{color: 'white'}} size="small" onClick={() => {setCurrentId(memory._id)}}>
                     <MoreHorizIcon fontSize="default" />
                 </Button>
             </div>
             <div className={classes.details}>
                 <Typography variant="body2" color="textSecondary">{ memory.tags.map(tag => `#${tag} `) }</Typography>
             </div>
+            </CardMedia>
             <CardContent>
                 <Typography className={classes.title} variant="h5" gutterBottom>{ memory.message }</Typography>
             </CardContent>
             <CardActions className={classes.cardActions} >
                 <Button size="small" color="primary" onClick={() => {}}>
-                    <ThumbUpAltIcon fontSize="small" />
-                    Like { memory.likeCount}
+                    <ThumbUpAltIcon fontSize="small" />{` Like ${memory.likeCount}`}
                 </Button>
                 <Button size="small" color="primary" onClick={() => {}}>
-                    <DeleteIcon fontSize="small" />
-                    Delete
+                    <DeleteIcon fontSize="small" />{` Delete `}
                 </Button>                
-            </CardActions>
-            </CardMedia>
+            </CardActions>            
         </Card>
     )
 }

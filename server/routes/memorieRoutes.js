@@ -1,8 +1,9 @@
-import express from "express";
-import { getMemories, createMemorie } from '../controllers/memorie.js';
+import express from 'express';
+import { getMemories, createMemorie, updateMemorie } from '../controllers/memorie.js';
 
 const memorieRoutes = express.Router();
-memorieRoutes.get("/", getMemories);
-memorieRoutes.post("/", createMemorie);
+memorieRoutes.get('/', getMemories);
+memorieRoutes.post('/', createMemorie);
+memorieRoutes.patch('/:id', updateMemorie);
 
 export default memorieRoutes;

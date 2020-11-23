@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import memorie from "../models/memorie.js";
 
 export const getMemories = async (req, res) => {
@@ -19,3 +20,19 @@ export const createMemorie = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
+
+export const updateMemorie = async (req, res) => {
+  const { id: _id } = req.params;
+  const memory = req.body;
+  if(!mongoose.Types.ObjectId.isValid(_id)) {
+    return res.status(404).send('No memory with that id');
+  }
+  try {
+    const updatedMemory = await memorie.findByIdAndUpdate(_id, memory, {new: true});
+    res.status(200).json(updatedMemory);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+  
+}
+

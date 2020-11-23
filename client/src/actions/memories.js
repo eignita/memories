@@ -1,7 +1,5 @@
 import * as api from "../api";
-
-const FETCH_ALL = "FETCH_ALL";
-const CREATE = "CREATE";
+import { CREATE, UPDATE, FETCH_ALL } from '../constants/constant';
 
 // Action creators
 export const getMemories = () => async (dispatch) => {
@@ -14,9 +12,18 @@ export const getMemories = () => async (dispatch) => {
 };
 
 export const createMemory = (newMemory) => async (dispatch) => {
-  try {    
+  try {
     const { data } = await api.createMemory(newMemory);
-    dispatch({type: CREATE, payload: data});
+    dispatch({ type: CREATE, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateMemory = (id, memory) => async (dispatch) => {
+  try {
+    const { data } = await api.updateMemory(id, memory);
+    dispatch({ type: UPDATE, payload: data });
   } catch (error) {
     console.log(error);
   }

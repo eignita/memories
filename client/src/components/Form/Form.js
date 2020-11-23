@@ -1,19 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { TextField, Typography, Button, Paper } from "@material-ui/core";
 import FileBase from 'react-file-base64';
-import { useDispatch } from 'react-redux';
-import { createMemory } from '../../actions/memories';
+import { useDispatch, useSelector } from 'react-redux';
+import { createMemory, updateMemory } from '../../actions/memories';
 import useStyles from "./styles";
 
-function Form() {
+function Form({currentId, setCurrentId}) {
   const classes = useStyles();
   const [memoryData, setMemoryData] = useState({ title: '', message: '', creator: '', tags: '', selectedFile: ''});
+  const memory = useSelector(state => currentId ? state.memories.find(p => p._id === currentId): null);
   const dispatch = useDispatch();
+  useEffect(()  =>  {
+    if(memory) {
+      setMemoryData(memory);
+    }
+  },[memory]);
+
   const handleSubmit = (e) => {
       e.preventDefault();
-      dispatch(createMemory(memoryData));
+      if(currentId) {
+          dispatch(updateMemory(currentId, memoryData));
+      }
+      else {
+        dispatch(createMemory(memoryData));
+      }
   };
   const clear = () => {};
+  // GET CURRENT ID OF MEMORY TO UPDATE
+
+
   return (
     <Paper className={classes.paper}>
       <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
