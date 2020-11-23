@@ -14,7 +14,7 @@ export const getMemories = () => async (dispatch) => {
 };
 
 export const createMemory = (newMemory) => async (dispatch) => {
-  try {
+  try {    
     const { data } = await api.createMemory(newMemory);
     dispatch({type: CREATE, payload: data});
   } catch (error) {

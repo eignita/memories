@@ -10,8 +10,8 @@ export const getMemories = async (req, res) => {
 };
 
 export const createMemorie = async (req, res) => {
-  const newmemory = req.body;
-  const newmemorie = new memorie(newmemory);
+  const {title, message, creator, tags, selectedFile} = req.body;  
+  const newmemorie = new memorie({title, message, creator, tags, selectedFile});  
   try {
     await newmemorie.save();
     res.status(201).json(newmemorie);
