@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import memories from './memories';
+import memoriesReducer from './memories';
 
 const rootReducer = combineReducers({
-    memories
+    memories: memoriesReducer,
 });
 
 export default rootReducer;

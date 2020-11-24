@@ -14,7 +14,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getMemories());
-  }, [dispatch])
+  }, [currentId, dispatch])
 
   return (
     <Container maxWidth="lg">
@@ -24,7 +24,7 @@ function App() {
       </AppBar>
       <Grow in>
         <Container>
-          <Grid container justify="space-between" alignItems="stretch" spacing={3}>
+          <Grid className={classes.mainContainer} container justify="space-between" alignItems="stretch" spacing={3}>
             <Grid item xs={12} sm={8}>
               <Memories setCurrentId={setCurrentId} />
             </Grid>

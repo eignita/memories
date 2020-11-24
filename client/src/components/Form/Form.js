@@ -19,15 +19,17 @@ function Form({currentId, setCurrentId}) {
   const handleSubmit = (e) => {
       e.preventDefault();
       if(currentId) {
-          dispatch(updateMemory(currentId, memoryData));
+          dispatch(updateMemory(currentId, memoryData));          
       }
       else {
         dispatch(createMemory(memoryData));
       }
+      clear();
   };
-  const clear = () => {};
-  // GET CURRENT ID OF MEMORY TO UPDATE
-
+  const clear = () => {
+    setMemoryData({ title: '', message: '', creator: '', tags: '', selectedFile: ''});
+    setCurrentId(null);
+  };
 
   return (
     <Paper className={classes.paper}>

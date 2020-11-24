@@ -6,6 +6,7 @@ export const getMemories = async (req, res) => {
     const memories = await memorie.find();
     res.status(200).json(memories);
   } catch (error) {
+    console.log(error);
     res.status(404).json({ message: error.message });
   }
 };
@@ -17,6 +18,7 @@ export const createMemorie = async (req, res) => {
     await newmemorie.save();
     res.status(201).json(newmemorie);
   } catch (error) {
+    console.log(error);
     res.status(409).json({ message: error.message });
   }
 };
@@ -31,8 +33,23 @@ export const updateMemorie = async (req, res) => {
     const updatedMemory = await memorie.findByIdAndUpdate(_id, memory, {new: true});
     res.status(200).json(updatedMemory);
   } catch (error) {
+    console.log(error);
     res.status(409).json({ message: error.message });
   }
   
+};
+
+export const deleteMemorie = async (req, res) => {
+  const { id } = req.params;
+  if(!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).send('No memory with that id');
+  }
+  try {
+    await memorie.findByIdAndRemove(id);
+    res.status(200).json(id)    
+  } catch (error) {
+    console.log(error);   
+    res.status(409).json({ message: error.message }); 
+  }  
 }
 
