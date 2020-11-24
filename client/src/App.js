@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Container, AppBar, Typography, Grow, Grid} from '@material-ui/core';
+import { Container, AppBar, Typography, Grow, Grid, Link} from '@material-ui/core';
 import memories from './images/memories.png';
 import Memories from './components/Memories/Memories';
 import Form from './components/Form/Form';
@@ -34,6 +34,11 @@ function App() {
           </Grid>
         </Container>
       </Grow>
+      {/* <AppBar className={classes.appBar} position="static" color="inherit"> */}
+        <Typography className={classes.footer} position="static" variant="body2" align="center">
+        {'Copyright © '}{new Date().getFullYear()}{' '}<Link color="inherit" href="https://wow-memories.netlify.app/">Wow Memories</Link>{' from Dravit Kumar '}
+        </Typography>
+      {/* </AppBar> */}
     </Container>
   );
 }

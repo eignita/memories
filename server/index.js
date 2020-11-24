@@ -13,8 +13,8 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 // http://localhost:5000/memories/
 app.use('/memories', memorieRoutes); 
-app.use('/', (req, res) => {
-  res.write("Hello!! to world of memories. -Dravit");
+app.get('/', (req, res) => {
+  res.write("Hello!! notch raise the world of memories API.");
   res.end();
 }); 
 
