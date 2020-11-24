@@ -51,5 +51,19 @@ export const deleteMemorie = async (req, res) => {
     console.log(error);   
     res.status(409).json({ message: error.message }); 
   }  
-}
+};
+
+export const likeMemorie = async (req, res) => {
+  const { id } = req.params;
+  if(!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).send(`No memory with the id ${id}`);
+  }
+  try {
+    const memory = await memorie.findById(id);
+    const updatedMemory = await memorie.findByIdAndUpdate(id, {likeCount: memory.likeCount + 1}, {new: true});
+    res.status(200).json(updatedMemory);
+  } catch (error) {
+    console.log(error);
+  }
+};
 

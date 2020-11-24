@@ -36,3 +36,9 @@ Sol: npm install --save --legacy-peer-deps @material-ui/icons
 
 
 Provider: react-redux = keep track of global store to provide global state using store inside anywhere in app.
+
+Space out the elements in html using more than one space. 
+&nbsp;    - single space
+&thinsp;  - thin space
+&ensp;    - en space(half the point size of the font)
+&emsp;    - em space(point size of the font)

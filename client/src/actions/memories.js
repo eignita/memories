@@ -1,5 +1,5 @@
 import * as api from "../api";
-import { CREATE, UPDATE, FETCH_ALL, DELETE } from '../constants/actionTypes';
+import { CREATE, UPDATE, FETCH_ALL, DELETE, LIKE } from '../constants/actionTypes';
 
 // Action creators
 export const getMemories = () => async (dispatch) => {
@@ -31,9 +31,18 @@ export const updateMemory = (id, memory) => async (dispatch) => {
 
 export const deleteMemory = (id) => async (dispatch) => {
   try {
-    const { id } = await api.deleteMemory(id);
+    await api.deleteMemory(id);
     dispatch({ type: DELETE, payload: id })
   } catch (error) {
     console.log(error);
   }
-}
+};
+
+export const likeMemory = (id) => async (dispatch) => {
+  try {
+    const { data } = await api.likeMemory(id);
+    dispatch({type: LIKE, payload: data })
+  } catch (error) {
+    console.log(error);
+  }
+};

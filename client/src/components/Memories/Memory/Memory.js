@@ -5,7 +5,7 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
-import { deleteMemory } from '../../../actions/memories'
+import { deleteMemory, likeMemory } from '../../../actions/memories'
 import useStyles from './styles';
 
 function Memory({memory, setCurrentId}) {
@@ -16,7 +16,7 @@ function Memory({memory, setCurrentId}) {
             <CardMedia className={classes.media} image={memory.selectedFile} title={memory.title} />
             <div className={classes.overlay}>
                 <Typography variant="h6">{ memory.creator }</Typography>
-                <Typography variant="body2">{ moment(memory.createdAt).fromNow()}</Typography>
+                <Typography variant="body2">{ moment(memory.updatedAt).fromNow()}</Typography>
             </div>
             <div className={classes.overlay2}>
                 <Button style={{color: 'white'}} size="small" onClick={() => {setCurrentId(memory._id)}}>
@@ -31,8 +31,8 @@ function Memory({memory, setCurrentId}) {
                 <Typography variant="body2" color="textSecondary" gutterBottom component="p">{ memory.message }</Typography>
             </CardContent>
             <CardActions className={classes.cardActions} >
-                <Button size="small" color="primary" onClick={() => {}}>
-                    <ThumbUpAltIcon fontSize="small" />{` Like ${memory.likeCount}`}
+                <Button size="small" color="primary" onClick={() => {dispatch(likeMemory(memory._id))}}>
+                    <ThumbUpAltIcon fontSize="small" />&nbsp;{`Like ${memory.likeCount}`}
                 </Button>
                 <Button size="small" color="primary" onClick={() => {dispatch(deleteMemory(memory._id))}}>
                     <DeleteIcon fontSize="small" />{` Delete `}

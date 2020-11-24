@@ -38,7 +38,7 @@ function Form({currentId, setCurrentId}) {
         <TextField name="creator" variant="outlined" label="Creator" fullWidth value={ memoryData.creator } onChange={(e) => setMemoryData({...memoryData, creator: e.target.value})} />
         <TextField name="title" variant="outlined" label="Title" fullWidth value={ memoryData.title } onChange={(e) => setMemoryData({...memoryData, title: e.target.value})} />
         <TextField name="message" variant="outlined" label="Message" fullWidth value={ memoryData.message } onChange={(e) => setMemoryData({...memoryData, message: e.target.value})} />
-        <TextField name="tags" variant="outlined" label="Tags" fullWidth value={ memoryData.tags } onChange={(e) => setMemoryData({...memoryData, tags: e.target.value.trim().split(',')})} />
+        <TextField name="tags" variant="outlined" label="Tags" fullWidth value={ memoryData.tags } onChange={(e) => setMemoryData({...memoryData, tags: e.target.value.split(',')})} />
         <div className={classes.fileInput}><FileBase type="file" multiple={false} onDone={({base64}) => setMemoryData({...memoryData, selectedFile: base64})} /></div>
         <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" fullWidth type="submit">Submit</Button>
         <Button variant="contained" color="secondary" size="small" fullWidth onClick={clear}>Clear</Button>
