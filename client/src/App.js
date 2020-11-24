@@ -14,7 +14,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getMemories());
-  }, [currentId, dispatch])
+  }, [currentId, dispatch]);
 
   return (
     <Container maxWidth="lg">

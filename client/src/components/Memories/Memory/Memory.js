@@ -24,7 +24,7 @@ function Memory({memory, setCurrentId}) {
                 </Button>
             </div>
             <div className={classes.details}>
-                <Typography variant="body2" color="textSecondary">{ memory.tags.map(tag => `#${tag} `) }</Typography>
+                <Typography variant="body2" color="textSecondary">{ memory.tags.map(tag => `#${tag.trim()} `)}</Typography>
             </div>
             <Typography className={classes.title} gutterBottom variant="h5" component="h2">{memory.title}</Typography>
             <CardContent>                

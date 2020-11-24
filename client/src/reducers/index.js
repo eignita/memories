@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import memoriesReducer from './memories';
+import memoriesReducer from './memoriesReducer';
 
 const rootReducer = combineReducers({
     memories: memoriesReducer,

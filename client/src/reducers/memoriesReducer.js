@@ -1,5 +1,5 @@
 import { CREATE, UPDATE, FETCH_ALL, DELETE } from '../constants/actionTypes';
-
+//const initialState = [{ title: '', message: '', creator: '', tags: '', selectedFile: ''}];
 const memoriesReducer = (memories = [], action) => {
     switch(action.type) {
         case FETCH_ALL:
@@ -11,7 +11,7 @@ const memoriesReducer = (memories = [], action) => {
         case DELETE:
             return memories.filter(memory => memory._id !== action.payload);
         default:
-            return state;
+            return memories;
     }
 }
 

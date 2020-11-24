@@ -7,7 +7,6 @@ import useStyles from './styles';
 function Memories({ setCurrentId }) {
     const classes = useStyles();
     const memories = useSelector(state => state.memories);
-    console.log(memories);
     return (
         !memories.length ? <CircularProgress /> : (
             <Grid className={classes.container} container alignItems="stretch" spacing={3}>

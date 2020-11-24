@@ -24,13 +24,13 @@ export const createMemorie = async (req, res) => {
 };
 
 export const updateMemorie = async (req, res) => {
-  const { id: _id } = req.params;
+  const { id } = req.params;
   const memory = req.body;
-  if(!mongoose.Types.ObjectId.isValid(_id)) {
-    return res.status(404).send('No memory with that id');
+  if(!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).send('No memory with the id ${id}');
   }
   try {
-    const updatedMemory = await memorie.findByIdAndUpdate(_id, memory, {new: true});
+    const updatedMemory = await memorie.findByIdAndUpdate(id, memory, {new: true});
     res.status(200).json(updatedMemory);
   } catch (error) {
     console.log(error);
