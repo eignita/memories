@@ -1,7 +1,7 @@
 import axios from "axios";
 
-//const url = "http://localhost:5000/memories";
-const url = "https://wow-memories.herokuapp.com/memories";
+const url = "http://localhost:5000/memories";
+//const url = "https://wow-memories.herokuapp.com/memories";
 
 export const fetchMemories = () => axios.get(url);
 export const createMemory = (newMemory) => axios.post(url, newMemory);
