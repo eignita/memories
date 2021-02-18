@@ -4,6 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from 'dotenv';
 import memorieRoutes from './routes/memorieRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 const app = express();
 dotenv.config();
@@ -13,6 +14,8 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 // http://localhost:5000/memories/
 app.use('/memories', memorieRoutes); 
+app.use('/user', userRoutes);
+
 app.get('/', (req, res) => {
   res.write("Hello!! notch raise the world of memories API.");
   res.end();

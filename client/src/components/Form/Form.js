@@ -7,7 +7,8 @@ import useStyles from "./styles";
 
 function Form({currentId, setCurrentId}) {
   const classes = useStyles();
-  const [memoryData, setMemoryData] = useState({ title: '', message: '', creator: '', tags: '', selectedFile: ''});
+  const user = JSON.parse(localStorage.getItem('profile'));
+  const [memoryData, setMemoryData] = useState({title: '', message: '', tags: '', selectedFile: ''});
   const memory = useSelector(state => currentId ? state.memories.find(p => p._id === currentId): null);
   const dispatch = useDispatch();
   useEffect(()  =>  {
@@ -19,10 +20,10 @@ function Form({currentId, setCurrentId}) {
   const handleSubmit = (e) => {
       e.preventDefault();
       if(currentId) {
-          dispatch(updateMemory(currentId, memoryData));          
+          dispatch(updateMemory(currentId, {...memoryData, name: user?.result?.name}));          
       }
       else {
-        dispatch(createMemory(memoryData));
+        dispatch(createMemory( {...memoryData, name: user?.result?.name}));
       }
       clear();
   };
@@ -31,11 +32,20 @@ function Form({currentId, setCurrentId}) {
     setMemoryData({ title: '', message: '', creator: '', tags: '', selectedFile: ''});
   };
 
+  if(!user?.result?.name) {
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant="h6" align="center">
+          Please sign in to create your memories and like other's memories. 
+        </Typography>
+      </Paper>
+    )
+  }
+
   return (
     <Paper className={classes.paper}>
       <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
         <Typography variant="h6">{ currentId ? `Editing ${memory.title}`: `Creating a Memory` }</Typography>
-        <TextField name="creator" variant="outlined" label="Creator" fullWidth value={ memoryData.creator } onChange={(e) => setMemoryData({...memoryData, creator: e.target.value})} />
         <TextField name="title" variant="outlined" label="Title" fullWidth value={ memoryData.title } onChange={(e) => setMemoryData({...memoryData, title: e.target.value})} />
         <TextField name="message" variant="outlined" label="Message" fullWidth value={ memoryData.message } onChange={(e) => setMemoryData({...memoryData, message: e.target.value})} />
         <TextField name="tags" variant="outlined" label="Tags" fullWidth value={ memoryData.tags } onChange={(e) => setMemoryData({...memoryData, tags: e.target.value.split(',')})} />

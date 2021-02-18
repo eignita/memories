@@ -1,12 +1,14 @@
 import express from 'express';
 import { getMemories, createMemorie, updateMemorie, deleteMemorie, likeMemorie } from '../controllers/memorie.js';
 
-const memorieRoutes = express.Router();
-memorieRoutes.get('/', getMemories);
-memorieRoutes.post('/', createMemorie);
-memorieRoutes.patch('/:id', updateMemorie);
-memorieRoutes.patch('/:id/likememory', likeMemorie);
-memorieRoutes.delete('/:id', deleteMemorie);
+import auth from '../middleware/auth.js';
+
+const router = express.Router();
+router.get('/', getMemories);
+router.post('/', auth, createMemorie);
+router.patch('/:id', auth, updateMemorie);
+router.patch('/:id/likememory',auth,  likeMemorie);
+router.delete('/:id', auth,  deleteMemorie);
 
 
-export default memorieRoutes;
+export default router;

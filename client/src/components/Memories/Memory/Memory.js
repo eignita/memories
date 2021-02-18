@@ -15,7 +15,7 @@ function Memory({memory, setCurrentId}) {
         <Card className={classes.card}>
             <CardMedia className={classes.media} image={memory.selectedFile} title={memory.title} />
             <div className={classes.overlay}>
-                <Typography variant="h6">{ memory.creator }</Typography>
+                <Typography variant="h6">{ memory.name }</Typography>
                 <Typography variant="body2">{ moment(memory.updatedAt).fromNow()}</Typography>
             </div>
             <div className={classes.overlay2}>

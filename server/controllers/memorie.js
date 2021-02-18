@@ -12,8 +12,8 @@ export const getMemories = async (req, res) => {
 };
 
 export const createMemorie = async (req, res) => {
-  const {title, message, creator, tags, selectedFile} = req.body;  
-  const newmemorie = new memorie({title, message, creator, tags, selectedFile});  
+  const post = req.body;  
+  const newmemorie = new memorie({ ...post, creator: req.userId, createdAt: new Date().toISOString() });  
   try {
     await newmemorie.save();
     res.status(201).json(newmemorie);
@@ -55,12 +55,26 @@ export const deleteMemorie = async (req, res) => {
 
 export const likeMemorie = async (req, res) => {
   const { id } = req.params;
+
+  if(!req.userId) return res.status(400).json({ message: "Unauthenticated"});
+
   if(!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).send(`No memory with the id ${id}`);
   }
   try {
     const memory = await memorie.findById(id);
-    const updatedMemory = await memorie.findByIdAndUpdate(id, {likeCount: memory.likeCount + 1}, {new: true});
+
+    const index = memory.likes.findIndex((id) => id === String(req.userId));
+
+    if(index === -1) {
+      // like the post
+      memory.likes.push(req.userId);
+    } else {
+      //dislike post 
+      memory.likes = memory.likes.filter((id) => id !== String(req.userId));
+    }
+    memory.likeCount = memory?.likes.length;
+    const updatedMemory = await memorie.findByIdAndUpdate(id, memory, {new: true});
     res.status(200).json(updatedMemory);
   } catch (error) {
     console.log(error);
