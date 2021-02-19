@@ -73,7 +73,6 @@ export const likeMemorie = async (req, res) => {
       //dislike post 
       memory.likes = memory.likes.filter((id) => id !== String(req.userId));
     }
-    memory.likeCount = memory?.likes.length;
     const updatedMemory = await memorie.findByIdAndUpdate(id, memory, {new: true});
     res.status(200).json(updatedMemory);
   } catch (error) {

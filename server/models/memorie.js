@@ -12,7 +12,6 @@ const memorieSchema = mongoose.Schema(
         type: [String],
         default: [],
     },
-    likeCount: {type: Number, default: 0 },
   },
   { timestamps: true }
 );
